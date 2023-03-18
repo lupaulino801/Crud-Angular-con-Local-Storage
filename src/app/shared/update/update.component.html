@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-6">
-      <form [formGroup]="myForm"  (ngSubmit)="updtForm()">
+      <form [formGroup]="myForm"  (ngSubmit)="updtForm(id)">
         <div class="mb-3">
           <label class="form-label">Nombre</label>
           <input formControlName="nombre" type="text" class="form-control" >
