@@ -1,0 +1,58 @@
+<div class="mt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <form [formGroup]="myForm"  (ngSubmit)="sendForm()">
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input formControlName="nombre" type="text" class="form-control" >
+            <p class="text-danger">{{showerror('nombre')}}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ciudad</label>
+            <input formControlName="ciudad" type="text" class="form-control" >
+            <p class="text-danger">{{showerror('ciudad')}}</p>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Profesion</label>
+            <input formControlName="profesion" type="text" class="form-control" >
+            <p class="text-danger">{{showerror('profesion')}}</p>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-lg" type="submit" [disabled]="myForm.invalid">Agregar</button>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-sm-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Index</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Profesion</th>
+              <th scope="col">Actualiar</th>
+              <th scope="col">Borrar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lot of pers; let i = index">
+
+
+                <td>{{i}}</td>
+                <td>{{lot.nombre}}</td>
+                <td>{{lot.ciudad}}</td>
+                <td>{{lot.profesion}}</td>
+                <td><a class="btn btn-warning" (click)="update(i)" >Actulizar</a></td>
+                <td><a class="btn btn-danger">Borrar</a></td>
+
+
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
