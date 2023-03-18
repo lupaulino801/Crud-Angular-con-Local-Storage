@@ -12,11 +12,13 @@ import { Router} from '@angular/router';
 export class HomeComponent {
 
 pers: Personas []  = []
-updte:boolean = false;
+
 constructor(private formbul: FormBuilder, private _navig: Router){
+
   this.getLocalStor();
 
 }
+
 myForm: FormGroup = this.formbul.group({
   nombre: ['', [Validators.required, Validators.minLength(2) ]],
   ciudad: ['', [Validators.required, Validators.minLength(5) ]],
@@ -37,26 +39,40 @@ showerror(fields:string):any{
 }
 
 sendForm():void{
+
   if(this.myForm.valid){
-    const persona: Personas = this.myForm.value;
-    this.pers.push(persona);
-    this.guardarProductos();
+    const persona: Personas = this.myForm.value;    // igualamos persona al valor de lo que viene del formulario
+    this.pers.push(persona);  /// agregamos array con push lo que venga en persona
+    this.guardarProductos();   /// guardamos los datos con esta funcion
 
   }
 }
 
-getLocalStor():Personas [] {
-  this.pers = JSON.parse(localStorage.getItem('personas') || '[]');
-   return this.pers
+getLocalStor():Personas [] {   // ojo ver [] ya que con esto decimos que retornamos un arreglo de Personas
+
+  this.pers = JSON.parse(localStorage.getItem('personas') || '[]');    /// leemos y convertimos en objeto con JSON.parse
+   return this.pers   // retornarmos a la persona
 
 }
 
 private guardarProductos(): void {
-  localStorage.setItem('personas', JSON.stringify(this.pers));
+
+  localStorage.setItem('personas', JSON.stringify(this.pers));   ///  setItem para guardar en el local storage  lo que este dentro de SON.stringify donde esto sierve para
+                                                                 // guardar convertir un objeto en una cadena de texto, ya que el local storage solo guarda texto
+
 }
 
 update(i:number){
-  this._navig.navigate(['update', i]);
+
+  this._navig.navigate(['update', i]); // aqui navegamos
+
+}
+
+detele(ix:any){
+
+  this.pers = JSON.parse(localStorage.getItem('personas') || '[]');  /// leemos el local storage y lo convertimos en array
+  this.pers.splice(ix, 1);   /// le pasamos el splice borrar el ix, si le pongo ix,3 borraria 3 elemento pero como quiero solo el elemnto ix pongo ix,1
+  this.guardarProductos();  // guardamos
 
 }
 
